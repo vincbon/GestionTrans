@@ -1,19 +1,20 @@
 <?php
-class Inscription extends CI_Controller {
+require_once('Main_Controller.php');
+
+class Inscription extends Main_Controller {
 	
-	// Constructeur
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->model('User_model');
+		$this->load->model('Utilisateur_model');
 	}
 	
 	public function index() {
 		$data['title'] = 'Inscription';
 		$this->load->view('header', $data);
 		
-		$this->form_validation->set_rules('username', 'Pseudo', 'required');
+		$this->form_validation->set_rules('login', 'Pseudo', 'required');
 		$this->form_validation->set_rules('password', 'Mot de passe', 'required');
 		$this->form_validation->set_rules('passconf', 'Confirmation du mot de passe', 'required|matches[password]');
 			
@@ -23,13 +24,16 @@ class Inscription extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 			$this->load->view('form/inscription', $data);
 		} else {
-			if ($this->User_model->exist($_POST['username'])) {
-				$data['username'] = $_POST['username'];
+			$data['login'] = $_POST['login'];
+			if ($_POST['login'] == 'atm') {
+				$this->load->view('message/login_forbidden');
+				$this->load->view('form/inscription', $data);
+			} else if ($this->Utilisateur_model->exist($_POST['login'])) {
 				$this->load->view('message/user_already_exist', $data);
 				$this->load->view('form/inscription', $data);
 			} else {
-				$this->User_model->add(array('login' => $_POST['username'], 'pass' => $_POST['password'], 'username' => $_POST['username']));
-				redirect('connexion/login/'.$_POST['username']);
+				$this->Utilisateur_model->add(array('login' => $_POST['login'], 'pass' => $_POST['password'], 'login' => $_POST['login']));
+				redirect('connexion/login/'.$_POST['login']);
 			}
 		}
 		
