@@ -5,3 +5,7 @@
 .btn {
 	font-weight: bold;
 }
+
+label {
+	text-align: right;
+}
