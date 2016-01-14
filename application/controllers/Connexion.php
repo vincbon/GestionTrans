@@ -12,10 +12,11 @@ class Connexion extends Main_Controller {
 	}
 	
 	public function index() {
+		global $data;
 		$data['title'] = 'Connexion';
 		$this->load->view('header', $data);
 		
-		$this->form_validation->set_rules('username', 'Pseudo', 'required');
+		$this->form_validation->set_rules('login', 'Pseudo', 'required');
 		$this->form_validation->set_rules('password', 'Mot de passe', 'required');
 			
 		$this->form_validation->set_message('required', 'Champs requis');

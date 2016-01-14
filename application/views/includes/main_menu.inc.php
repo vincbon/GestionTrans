@@ -1,18 +1,28 @@
 
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="<?php echo base_url(); ?>">Festival des Transmusicales</a>
+		<a class="navbar-brand" href="<?php echo site_url(); ?>">Festival des Transmusicales</a>
 	</div>
-	<ul class="nav navbar-nav">
+	<ul id="menu-app" class="nav navbar-nav">
 		<?php if ($user_connected) : ?>
 			<?php if ($atm_connected) : ?>
-				<li><a href="<?php echo base_url("???"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Réservations en attente</a></li>
+				<li><a href="<?php echo site_url("???"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Réservations en attente</a></li>
+			<?php else : ?>
+			
 			<?php endif; ?>
 		<?php else : ?>
-			<?php if ($title == 'inscription') : ?>
-				<li><a href="<?php echo base_url("connexion"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Connexion</a></li>
+		
+		<?php endif; ?>
+	</ul>
+	<ul id="menu-user" class="nav navbar-nav pull-right">
+		<?php if ($user_connected) : ?>
+			<li><?php echo $user_login ?></li>
+			<li><a href="<?php echo site_url("connexion/logout"); ?>"><i class="fa fa-power-off"></i></a></li>
+		<?php else : ?>
+			<?php if ($this->router->fetch_class() == "inscription") : ?>
+				<li><a href="<?php echo site_url("connexion"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Connexion</a></li>
 			<?php else : ?>
-				<li><a href="<?php echo base_url("inscription"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Inscription</a></li>
+				<li><a href="<?php echo site_url("inscription"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Inscription</a></li>
 			<?php endif; ?>
 		<?php endif; ?>
 	</ul>

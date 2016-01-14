@@ -11,6 +11,7 @@ class Inscription extends Main_Controller {
 	}
 	
 	public function index() {
+		global $data;
 		$data['title'] = 'Inscription';
 		$this->load->view('header', $data);
 		

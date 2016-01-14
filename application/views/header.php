@@ -8,6 +8,6 @@
 		<link href="<?php echo base_url("assets/css/perso.css"); ?>" rel="stylesheet" type="text/css" />
 		<script src="<?php echo base_url("assets/js/jquery-2.2.0.min.js") ?>"></script>
 	</head>
-	
 	<body>
-	<?php include('includes/main_menu.inc.php') ?>
+		<div id="body_container" class="container">
+			<?php include('includes/main_menu.inc.php') ?>
