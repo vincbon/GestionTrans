@@ -1,3 +1,7 @@
+<?php
+	$taille_label = 5
+?>
+
 <div class="container col-md-8">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -12,16 +16,13 @@
 			?>
 			<div class="form-group col-md-6">
 				<!-- Nom de la salle -->
-				<?php
-					$critere = 'nom';
-					if (isset($old_data[$critere])) {
-						$contenuCritere = $old_data[$critere];
-					}
+				<?php 
+					$critere = 'nom'; 
 				?>
 				<div class="form-group">
 					<?php
 						$attributes = array(
-							'class'		=> 'control-label col-md-5',
+							'class'		=> 'control-label col-md-'.$taille_label,
 						);
 						echo form_label('Nom', $critere, $attributes);
 					?>
@@ -35,7 +36,6 @@
 								'autofocus' => TRUE
 							);
 							echo form_input($attributes);
-							echo form_error($attributes['name']);
 						?>
 					</div>
 				</div>
@@ -44,14 +44,11 @@
 				<!-- Date de concert -->
 				<?php
 					$critere = 'date';
-					if (isset($old_data[$critere])) {
-						$contenuCritere = $old_data[$critere];
-					}
 				?>
 				<div class="form-group">
 					<?php
 						$attributes = array(
-							'class'		=> 'control-label col-md-5'
+							'class'		=> 'control-label col-md-'.$taille_label
 						);
 						echo form_label('Date', $critere, $attributes);
 					?>
@@ -63,7 +60,6 @@
 								'class'		=> 'form-control',
 							);
 							echo form_input($attributes);
-							echo form_error($attributes['name']);
 						?>
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-th"></span>
@@ -75,14 +71,11 @@
 				<!-- Créneau horaire -->
 				<?php
 					$critere = 'creneau';
-					if (isset($old_data[$critere])) {
-						$contenuCritere = $old_data[$critere];
-					}
 				?>
 				<div class="form-goup">
 					<?php
 						$attributes = array(
-							'class'		=> 'control-label col-md-5'
+							'class'		=> 'control-label col-md-'.$taille_label
 						);
 						echo form_label('Créneau horaire', $critere, $attributes);
 					?>
@@ -104,7 +97,6 @@
 								'class'		=> 'form-control'
 							);
 							echo form_input($attributes);
-							echo form_error($attributes['name']);
 						?>
 					</div>
 					<p class="help-block">ex: 19h - 23h</p>
@@ -115,14 +107,11 @@
 				<!-- Capacité -->
 				<?php
 					$critere = 'capacite';
-					if (isset($old_data[$critere])) {
-						$contenuCritere = $old_data[$critere];
-					}
 				?>
 				<div class="form-group">
 					<?php
 						$attributes = array(
-							'class'		=> 'control-label col-md-5'
+							'class'		=> 'control-label col-md-'.$taille_label
 						);
 						echo form_label('Capacité', $critere, $attributes);
 					?>
@@ -130,14 +119,13 @@
 						<?php
 							$attributes = 'class="form-control"';
 							$options = array(
-								'0'		=> '',
+								'0'		=> 'Toutes',
 								'1'		=> 'Moins de 100 places',
 								'2'		=> 'Entre 100 et 500 places',
 								'3'		=> 'Entre 500 et 1000 places',
 								'4'		=> 'Plus de 1000 places'
 							);
 							echo form_dropdown($critere, $options, '0', $attributes);
-							echo form_error($critere);
 						?>
 					</div>
 				</div>
@@ -145,17 +133,14 @@
 
 				<!-- Accessibilité -->
 				<?php
-					$critere = 'accessibilite';
-					if (isset($old_data[$critere])) {
-						$contenuCritere = $old_data[$critere];
-					}
+					$critere = 'acces_handicap';
 				?>
 				<div class="form-group">
 					<?php
 						$attributes = array(
-							'class'		=> 'control-label col-md-5'
+							'class'		=> 'control-label col-md-'.$taille_label
 						);
-						echo form_label('Accessibilité', $critere, $attributes);
+						echo form_label('Accès handicap', $critere, $attributes);
 					?>
 					<div class="input-group col-md-7">
 						<?php
@@ -172,8 +157,8 @@
 
 				<!-- Bouton de validation -->
 				<div class="form-group">
-					<div class="col-md-5"></div>
-					<div class="col-md-7">
+					<div class="col-md-<?php echo $taille_label ?>"></div>
+					<div class="col-md-7 submit-container">
 						<?php 
 							$attributes = array(
 								'name'		=> 'submit',

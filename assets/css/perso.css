@@ -32,7 +32,7 @@ label {
 	text-align: center;
 }
 
-#connexion_container .panel {
+.panel {
 	border-width: 0;
 }
 
@@ -61,4 +61,8 @@ label {
 
 #connexion_container .panel-footer {
 	padding: 5px 0;
+}
+
+.submit-container {
+	padding: 0;
 }
