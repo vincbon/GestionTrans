@@ -18,26 +18,58 @@ class Inscription extends Main_Controller {
 		$data['title'] = 'Inscription';
 		$this->load->view('header', $data);
 		
-		$this->form_validation->set_rules('login', 'Pseudo', 'required');
-		$this->form_validation->set_rules('password', 'Mot de passe', 'required');
-		$this->form_validation->set_rules('passconf', 'Confirmation du mot de passe', 'required|matches[password]');
-			
-		$this->form_validation->set_message('required', 'Champs requis');
-		$this->form_validation->set_message('matches', 'La confirmation du mot de passe a échoué');
+		$this->form_validation->set_rules('nom', 'Nom', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('mail', 'E-mail', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('origine', 'Origine', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('date_debut', 'Date de formation', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('formation', 'Formation', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('genre', 'Genre', '', 
+			array()
+		);
+		$this->form_validation->set_rules('elements_principaux', 'Eléments principaux', '', 
+			array()
+		);
+		$this->form_validation->set_rules('elements_ponctuels', 'Eléments ponctuels', '', 
+			array()
+		);
+		$this->form_validation->set_rules('parentes', 'Parentés', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('site_web', 'Site web', 'required', 
+			array('required'	=>	$this->lang->line('error_field_required'))
+		);
+		$this->form_validation->set_rules('discographie', 'Discographie', '', 
+			array()
+		);
+		$this->form_validation->set_rules('photos', 'Photos', '', 
+			array()
+		);
+		$this->form_validation->set_rules('videos', 'Vidéos', '', 
+			array()
+		);
+		
 		
 		if ($this->form_validation->run() == false) {
 			$this->load->view('form/inscription', $data);
 		} else {
-			$data['login'] = $_POST['login'];
-			if ($_POST['login'] == 'atm') {
-				$this->load->view('message/login_forbidden');
+			if ($_POST['nom'] == 'atm') {
+				$data['username_taken'] = true;
 				$this->load->view('form/inscription', $data);
 			} else if ($this->Utilisateur_model->exist($_POST['login'])) {
 				$this->load->view('message/user_already_exist', $data);
 				$this->load->view('form/inscription', $data);
 			} else {
-				$this->Utilisateur_model->add(array('login' => $_POST['login'], 'pass' => $_POST['password'], 'login' => $_POST['login']));
-				redirect('connexion/login/'.$_POST['login']);
+				$this->Utilisateur_model->add(array('nom' => $_POST['login'], 'pass' => $_POST['password'], 'login' => $_POST['login']));
 			}
 		}
 		

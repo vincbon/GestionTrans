@@ -6,33 +6,37 @@
 		<div class="panel-body">
 			<?php 
 			$attributes = array(
-				'id'	=>	'form_connexion',
+				'id'	=>	'connexion_form',
 			);
 			echo form_open('connexion', $attributes); 
 			?>
 			
 			<div class="form-group">
 				<?php
+				$input_name = 'login';
+				
 				$attributes = array(
-					'id'	=>	'login',
-					'name'	=>	'login',
-					'value'	=>	set_value('login'),
+					'id'	=>	$input_name,
+					'name'	=>	$input_name,
+					'value'	=>	set_value($input_name),
 					'placeholder' => 'Pseudo',
 				);
 				echo form_input($attributes);
-				echo form_error('login');
+				echo form_error($input_name);
 				?>
 			</div>
 			
 			<div class="form-group">
 				<?php
+				$input_name = 'password';
+				
 				$attributes = array(
-					'id'	=>	'password',
-					'name'	=>	'password',
+					'id'	=>	$input_name,
+					'name'	=>	$input_name,
 					'placeholder' => 'Mot de passe',
 				);
 				echo form_password($attributes);
-				echo form_error('password');
+				echo form_error($input_name);
 				?>
 			</div>
 			

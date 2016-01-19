@@ -8,6 +8,14 @@ label {
 	text-align: right;
 }
 
+.label-required::after {
+	content: " (*)";
+}
+
+.panel {
+	border-width: 0;
+}
+
 .panel-title {
 	font-weight: bold;
 }
@@ -27,15 +35,21 @@ label {
 	
 }
 
+
+/* CONNEXION */
+
 #connexion_container {
 	margin: 0 auto;
 	text-align: center;
 }
 
+<<<<<<< HEAD
 .panel {
 	border-width: 0;
 }
 
+=======
+>>>>>>> 6f7caf538f8d49980b424766284ff946c55423c0
 #connexion_container .panel-title {
 	font-size: xx-large;
 }
@@ -63,6 +77,13 @@ label {
 	padding: 5px 0;
 }
 
+
 .submit-container {
 	padding: 0;
+}
+
+/* INSCRIPTION */
+
+#inscription_container form {
+	margin: 0 auto;
 }
