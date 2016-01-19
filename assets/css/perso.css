@@ -8,6 +8,14 @@ label {
 	text-align: right;
 }
 
+.label-required::after {
+	content: " (*)";
+}
+
+.panel {
+	border-width: 0;
+}
+
 .panel-title {
 	font-weight: bold;
 }
@@ -27,13 +35,12 @@ label {
 	
 }
 
+
+/* CONNEXION */
+
 #connexion_container {
 	margin: 0 auto;
 	text-align: center;
-}
-
-#connexion_container .panel {
-	border-width: 0;
 }
 
 #connexion_container .panel-title {
@@ -61,4 +68,11 @@ label {
 
 #connexion_container .panel-footer {
 	padding: 5px 0;
+}
+
+
+/* INSCRIPTION */
+
+#inscription_container form {
+	margin: 0 auto;
 }
