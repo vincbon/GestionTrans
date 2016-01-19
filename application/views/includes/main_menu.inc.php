@@ -1,7 +1,7 @@
 
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="<?php echo site_url(); ?>">Festival des Transmusicales</a>
+		<a class="navbar-brand" href="<?php echo site_url(); ?>">Les Rencontres Trans Musicales</a>
 	</div>
 	<ul id="menu-app" class="nav navbar-nav">
 		<?php if ($user_connected) : ?>
@@ -20,9 +20,9 @@
 			<li><a href="<?php echo site_url("connexion/logout"); ?>"><i class="fa fa-power-off"></i></a></li>
 		<?php else : ?>
 			<?php if ($this->router->fetch_class() == "inscription") : ?>
-				<li><a href="<?php echo site_url("connexion"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Connexion</a></li>
+				<li><a href="<?php echo site_url("connexion"); ?>">Connexion</a></li>
 			<?php else : ?>
-				<li><a href="<?php echo site_url("inscription"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Inscription</a></li>
+				<li><a href="<?php echo site_url("inscription"); ?>">Inscription</a></li>
 			<?php endif; ?>
 		<?php endif; ?>
 	</ul>

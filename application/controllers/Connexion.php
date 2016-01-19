@@ -13,19 +13,24 @@ class Connexion extends Main_Controller {
 	
 	public function index() {
 		global $data;
+
+		//if ($data['user_connected']) redirect();
+
 		$data['title'] = 'Connexion';
 		$this->load->view('header', $data);
 		
-		$this->form_validation->set_rules('login', 'Pseudo', 'required');
-		$this->form_validation->set_rules('password', 'Mot de passe', 'required');
+		$this->form_validation->set_rules('login', 'Pseudo', 'required', 
+			array('required'	=>	$this->lang->line('error_login_missing'))
+		);
+		$this->form_validation->set_rules('password', 'Mot de passe', 'required',
+			array('required'	=>	$this->lang->line('error_password_missing'))
+		);
 			
-		$this->form_validation->set_message('required', 'Champs requis');
-		
 		if ($this->form_validation->run() == false) {
 			$this->load->view('form/connexion', $data);
 		} else {
 			if (!$this->Utilisateur_model->exist($_POST['login'], $_POST['password'])) {
-				$this->load->view('message/unknown_user');
+				$data['user_unknown'] = true;
 				$this->load->view('form/connexion', $data);
 			} else {
 				$this->login($_POST['login']);
@@ -41,7 +46,7 @@ class Connexion extends Main_Controller {
 	}
 	
 	public function logout() {
-		session_destroy();
+		$this->session->set_userdata('login', null);
 		redirect();
 	}
 }

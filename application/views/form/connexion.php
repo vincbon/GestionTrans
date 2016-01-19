@@ -1,7 +1,7 @@
-<div class="container col-md-3">
+<div id="connexion_container" class="container col-md-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title clearfix large">Connexion</span>
+			<span class="panel-title">Bienvenue !</span>
 		</div>
 		<div class="panel-body">
 			<?php 
@@ -29,7 +29,6 @@
 				$attributes = array(
 					'id'	=>	'password',
 					'name'	=>	'password',
-					'value'	=>	set_value('password'),
 					'placeholder' => 'Mot de passe',
 				);
 				echo form_password($attributes);
@@ -37,12 +36,16 @@
 				?>
 			</div>
 			
+			<?php if (isset($user_unknown)) : ?>
+				<div class="message-error"><?php echo $this->lang->line('error_user_unknown'); ?></div>
+			<?php endif; ?>
+
 			<div class="form-group">
 				<?php
 				$attributes = array(
 					'id'	=>	'submit_connexion',
 					'class'	=>	'btn btn-primary',
-					'value'	=>	'Se connecter',
+					'value'	=>	'Connexion',
 				);
 				echo form_submit($attributes);
 				?>
@@ -52,6 +55,7 @@
 		</div>
 		<div class="panel-footer">
 			<p class="help-block"><em>Pas encore inscrit ? <a href="<?php echo site_url("inscription"); ?>" >S'inscrire</a></em></p>
+			<p class="help-block"><em>Mot de passe oublié ? <a href="<?php echo site_url(); ?>" >Cliquez-ici</a></em></p>
 		</div>
 	</div>
 </div>

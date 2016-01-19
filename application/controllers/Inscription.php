@@ -12,6 +12,9 @@ class Inscription extends Main_Controller {
 	
 	public function index() {
 		global $data;
+		
+		if ($data['user_connected']) redirect();
+
 		$data['title'] = 'Inscription';
 		$this->load->view('header', $data);
 		
