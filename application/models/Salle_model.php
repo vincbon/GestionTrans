@@ -21,15 +21,15 @@ class Salle_model extends CI_Model {
 	}
 	
 	// Renvoie un array contenant les données des salles répondant aux critères spécifiés
-	public function get($data_equal = null, $data_like = null, $order_by = 'id') {
+	public function get($data_equal = null, $data_like = null, $order_by = 'nom') {
 		if ($data_equal != null) {
 			$this->db->where($data_equal);
 		}
 		if ($data_like != null) {
 			$this->db->like($data_like);
 		}
-		$this->db->order_by($orderby, 'ASC');
-		return $this->db->get('salle');
+		$this->db->order_by($order_by, 'ASC');
+		return $this->db->get('salle')->result_array();
 	}
 	
 	// Renvoie le nombre de salles enregistrées

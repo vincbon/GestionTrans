@@ -17,31 +17,36 @@ class Salles extends Main_Controller {
 		
 		$this->load->view('header', $data);
 		
-		if ($this->form_validation->run() == false) {
-			$this->load->view('form/rechercheSalles', $data);
-			//$this->display_reservations();
-		} else {
-			$this->load->view('form/rechercheSalles', $data);
-			$this->display_reservations();
-		}
+		$this->form_validation->run();
+		$this->load->view('form/rechercheSalles', $data);
+		$this->display_salles();
 		
 		$this->load->view('footer', $data);
 	}
 	
-	public function display_reservations() {
-		$data['title'] = 'Réservations';
+	public function display_salles() {
+		$data['title'] = 'Salles';
 		
-		// Critère de tri
-		if (isset($_GET['o'])) {
-			$o = $_GET['o'];
-		} else {
-			$o = 'id';
+		// Récupếration des données sur les champs
+		$data['array_headings'] = $this->Salle_model->getFields();
+		$data['fields_metadata'] = $this->Salle_model->getFieldsMetaData();
+		
+		// Récupération des critères sur les salles à afficher
+		$data['champsLike'] = null;
+		$data['champsEqual'] = null;
+		foreach ($data['array_headings'] as $champ) {
+			if (isset($_GET[$champ])) {
+				if (($_GET[$champ] == 'true' OR $_GET[$champ] == 'false')
+				OR strtotime(str_replace('/', '-', $_GET[$champ]))) {
+					$data['champsEqual'][$champ] = $_GET[$champ];
+				} else {
+					$data['champsLike'][$champ] = $_GET[$champ];
+				}
+			}
 		}
 
-		// Récupération des données
-		$data['array_data'] = $this->Salle_model->get($o, $data['champsEqual'], $data['champsLike'])->result_array();
-		$data['fields_metadata'] = $this->Salle_model->getFieldsMetaData();
-		$data['array_headings'] = $this->Salle_model->getFields();
+		// Récupération des données principales
+		$data['array_data'] = $this->Salle_model->get($data['champsEqual'], $data['champsLike']);
 
 		//$this->perso->set_data_for_display('pilote', $data['array_data']);
 		

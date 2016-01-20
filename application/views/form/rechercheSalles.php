@@ -2,7 +2,7 @@
 	$taille_label = 5
 ?>
 
-<div class="container col-md-8">
+<div class="container col-md-8 col-md-offset-2">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span class="panel-title clearfix large">Rechercher une salle</span>
