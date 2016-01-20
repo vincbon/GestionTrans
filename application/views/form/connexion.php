@@ -1,4 +1,4 @@
-<div id="connexion_container" class="container col-md-3">
+<div id="connexion_container" class="container col-md-offset-4 col-md-4">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span class="panel-title">Bienvenue !</span>

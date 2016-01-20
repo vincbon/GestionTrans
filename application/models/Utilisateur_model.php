@@ -34,19 +34,27 @@ class Utilisateur_model extends CI_Model {
 	// Renvoie vrai si le couple login/password existe, faux sinon
 	// Peut aussi rechercher si un login seulement existe
 	public function exist($login, $password = null) {
-		if ($password != null) {
-			$array['pass'] = $password;
-		}
+		if ($password != null) $array['pass'] = $password;
 		$array['login'] = $login;
 		$this->db->where($array);
 		$this->db->from('utilisateur');
-		return ($this->db->count_all_results() == 1);
+		return ($this->db->count_all_results() >= 1);
 	}
-	
-	
-	// Ajoute un utilisateur avec les informations contenues dans $data.
-	public function add($data) {
+
+
+	// Ajoute un utilisateur en générant un login unique
+	// Renvoie:	Le login généré
+	public function add($data = null) {
+		if ($data == null) {
+			do {
+				$data['login'] = 'u' . rand(100000,999999);
+			} while ($this->exist($data['login']));
+			//note: génération non sécurisée et pas vraiment aléatoire mais osef ici
+			//voir http://stackoverflow.com/questions/4356289/php-random-string-generator/31107425
+			$data['pass'] = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+		}
 		$this->db->insert('utilisateur', $data);
+		return $data['login'];
 	}
 
 
@@ -66,6 +74,4 @@ class Utilisateur_model extends CI_Model {
 	public function count() {
 		return $this->db->count_all('utilisateur');
 	}
-
 }
-

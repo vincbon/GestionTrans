@@ -32,24 +32,21 @@ label {
 
 .message-error {
 	margin: 3px 0 10px 0;
-	
+	color: firebrick;
+}
+
+.submit-container {
+	padding: 0;
 }
 
 
 /* CONNEXION */
 
 #connexion_container {
-	margin: 0 auto;
+	margin-top: 150px;
 	text-align: center;
 }
 
-<<<<<<< HEAD
-.panel {
-	border-width: 0;
-}
-
-=======
->>>>>>> 6f7caf538f8d49980b424766284ff946c55423c0
 #connexion_container .panel-title {
 	font-size: xx-large;
 }
@@ -77,13 +74,12 @@ label {
 	padding: 5px 0;
 }
 
-
-.submit-container {
-	padding: 0;
-}
-
 /* INSCRIPTION */
 
-#inscription_container form {
-	margin: 0 auto;
+
+/* TMP */
+
+#tmp_id {
+	margin: 100px auto;
+	background-color: gainsboro;
 }
