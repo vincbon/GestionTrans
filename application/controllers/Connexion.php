@@ -14,7 +14,7 @@ class Connexion extends Main_Controller {
 	public function index() {
 		global $data;
 
-		//if ($data['user_connected']) redirect();
+		if ($data['user_connected']) redirect();
 
 		$data['title'] = 'Connexion';
 		$this->load->view('header', $data);

@@ -7,7 +7,7 @@
 			<?php 
 			$attributes = array(
 				'id'	=>	'inscription_form',
-				'class' =>	'col-md-offset-4 col-md-4',
+				'class' =>	'col-md-offset-3 col-md-5',
 			);
 			echo form_open('inscription', $attributes);
 

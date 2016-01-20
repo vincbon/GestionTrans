@@ -1,8 +1,9 @@
 <?php
 // Valeurs par défaut des variables $data
 if (!isset($btnReserver)) $btnReserver = false;
+if (!isset($btnValider)) $btnValider = false;
+if (!isset($btnRefuser)) $btnRefuser = false;
 if (!isset($object)) $object = null;
-if (!isset($show_false)) $show_false = null;
 
 // Récupération des champs spéciaux
 foreach ($fields_metadata as $num_field => $field) {
@@ -35,12 +36,6 @@ if (isset($date_fields) && !empty($date_fields)) {
 	}
 }
 
-// Sauvegarde des données de $_GET pour le tri
-$get_save = '';
-foreach ($_GET as $id => $val) {
-	if ($id != 'o') $get_save .= '&'.$id.'='.$val;
-}
-
 // Réinitialisation des index des données
 $array_data_tmp = [];
 foreach ($array_data as $num_row => $row) {
@@ -60,29 +55,20 @@ $array_data = $array_data_tmp;
 		<!-- Titres -->
 		<tr>
 			<?php foreach ($array_headings as $field => $heading) : ?>
-				<th>
-					<a href="<?php echo base_url().$this->router->fetch_class()."?o=".$field.$get_save; ?>" style="color:black">
-						<?php 
-							echo $heading;
-							if (isset($_GET['o']) && $_GET['o'] == $field) {
-								echo '<span class="fa fa-caret-up pull-right"></span>';
-							}
-						?>
-					</a>
-				</th>
+				<th><?php echo $heading ?></th>
 			<?php endforeach ?>
 			<?php
 				if ($array_data != []) {
-					if ($btnReserver) {
-						echo "<th></th>";
-					}
+					if ($btnReserver) echo "<th></th>";
+					if ($btnValider) echo "<th></th>";
+					if ($btnRefuser) echo "<th></th>";
 				}
 			?>
 		</tr>
 		
 		<!-- Données -->
 		<?php foreach ($array_data as $num_row => $row) : ?>
-			<tr id="<?php echo $object.'_'.$row[0] ?>" class="trb <?php if (isset($rows_false) && in_array($row, $rows_false, true)) echo 'danger' ?>">
+			<tr id="<?php echo $object.'_'.$row[0] ?>" class="trb">
 				<?php foreach ($row as $num_field => $value) : ?>
 					<td id="<?php echo $object.'_'.$row[0].'_'.$fields_metadata[$num_field]['name'] ?>"><?php echo $value; ?></td>
 				<?php endforeach ?>
