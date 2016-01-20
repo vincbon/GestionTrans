@@ -1,8 +1,9 @@
 <?php
 // Valeurs par défaut des variables $data
 if (!isset($btnReserver)) $btnReserver = false;
+if (!isset($btnValider)) $btnValider = false;
+if (!isset($btnRefuser)) $btnRefuser = false;
 if (!isset($object)) $object = null;
-if (!isset($show_false)) $show_false = null;
 
 // Récupération des champs spéciaux
 foreach ($fields_metadata as $num_field => $field) {
@@ -35,12 +36,6 @@ if (isset($date_fields) && !empty($date_fields)) {
 	}
 }
 
-// Sauvegarde des données de $_GET pour le tri
-$get_save = '';
-foreach ($_GET as $id => $val) {
-	if ($id != 'o') $get_save .= '&'.$id.'='.$val;
-}
-
 // Réinitialisation des index des données
 $array_data_tmp = [];
 foreach ($array_data as $num_row => $row) {
@@ -52,6 +47,7 @@ $array_data = $array_data_tmp;
 
 ?>
 
+<<<<<<< HEAD
 <div class="container col-md-10 col-md-offset-1">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -71,6 +67,32 @@ $array_data = $array_data_tmp;
 							?>
 						</a>
 					</th>
+=======
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<span class="panel-title clearfix large"><span class="glyphicon glyphicon-list"></span> <?php echo $title; ?></span>
+	</div>
+	<table class="table table-bordered table-striped table-condensed">
+		<!-- Titres -->
+		<tr>
+			<?php foreach ($array_headings as $field => $heading) : ?>
+				<th><?php echo $heading ?></th>
+			<?php endforeach ?>
+			<?php
+				if ($array_data != []) {
+					if ($btnReserver) echo "<th></th>";
+					if ($btnValider) echo "<th></th>";
+					if ($btnRefuser) echo "<th></th>";
+				}
+			?>
+		</tr>
+		
+		<!-- Données -->
+		<?php foreach ($array_data as $num_row => $row) : ?>
+			<tr id="<?php echo $object.'_'.$row[0] ?>" class="trb">
+				<?php foreach ($row as $num_field => $value) : ?>
+					<td id="<?php echo $object.'_'.$row[0].'_'.$fields_metadata[$num_field]['name'] ?>"><?php echo $value; ?></td>
+>>>>>>> 8d28a343a0ac2df889a64baca3ada60e4951864b
 				<?php endforeach ?>
 				<?php
 					if ($array_data != []) {
