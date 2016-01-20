@@ -27,14 +27,14 @@ class Salles extends Main_Controller {
 	public function display_salles() {
 		$data['title'] = 'Salles';
 		
-		// Récupếration des données sur les champs
-		$data['array_headings'] = $this->Salle_model->getFields();
-		$data['fields_metadata'] = $this->Salle_model->getFieldsMetaData();
+		// Récupération des champs et de leurs informations
+		$data['headings'] = $this->Salle_model->getFields();
+		$data['fieldsMetaData'] = $this->Salle_model->getFieldsMetaData();
 		
 		// Récupération des critères sur les salles à afficher
 		$data['champsLike'] = null;
 		$data['champsEqual'] = null;
-		foreach ($data['array_headings'] as $champ) {
+		foreach ($data['headings'] as $champ) {
 			if (isset($_GET[$champ])) {
 				if (($_GET[$champ] == 'true' OR $_GET[$champ] == 'false')
 				OR strtotime(str_replace('/', '-', $_GET[$champ]))) {
@@ -46,13 +46,8 @@ class Salles extends Main_Controller {
 		}
 
 		// Récupération des données principales
-		$data['array_data'] = $this->Salle_model->get($data['champsEqual'], $data['champsLike']);
+		$data['tableData'] = $this->Salle_model->get($data['champsEqual'], $data['champsLike']);
 
-		//$this->perso->set_data_for_display('pilote', $data['array_data']);
-		
-		$data['btnReserver'] = true;
-		$data['object'] = 'salle';
-
-		$this->load->view('table', $data);
+		$this->load->view('tableRechercheSalle', $data);
 	}
 }
