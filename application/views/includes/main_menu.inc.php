@@ -1,5 +1,5 @@
 
-<div class="container">
+<div id="menu" class="container">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="<?php echo site_url(); ?>">Les Rencontres Trans Musicales</a>
 	</div>
@@ -16,7 +16,13 @@
 	</ul>
 	<ul id="menu-user" class="nav navbar-nav pull-right">
 		<?php if ($user_connected) : ?>
-			<li><?php echo $user_login ?></li>
+			<li><?php 
+				if ($user_login == 'atm') 
+					echo $user_login;
+				else 
+					echo $this->Artiste_model->get(array('login' => $user_login))[0]['nom'];
+				?>
+			</li>
 			<li><a href="<?php echo site_url("connexion/logout"); ?>"><i class="fa fa-power-off"></i></a></li>
 		<?php else : ?>
 			<?php if ($this->router->fetch_class() == "inscription") : ?>

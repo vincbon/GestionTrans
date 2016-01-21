@@ -8,6 +8,15 @@ label {
 	text-align: right;
 }
 
+th, td {
+	text-align: center;
+}
+
+td button {
+	width: 100%;
+	height: 100%;
+}
+
 .label-required::after {
 	content: " (*)";
 }
@@ -80,6 +89,5 @@ label {
 /* TMP */
 
 #tmp_id {
-	margin: 100px auto;
-	background-color: gainsboro;
+	margin-top: 100px;
 }

@@ -89,7 +89,7 @@ CREATE TABLE prjtrans.t_responsable (
 ALTER TABLE prjtrans.t_salle
 ADD CONSTRAINT t_salle_fk1 FOREIGN KEY(id_resp) REFERENCES prjtrans.t_responsable;
 
-CREATE TYPE STATUT AS ENUM('en cours', 'acceptée', 'refusée');
+CREATE TYPE STATUT AS ENUM('en attente', 'acceptée', 'refusée');
 
 CREATE TABLE prjtrans.t_reservation (
 	artiste	VARCHAR(60) NOT NULL,
@@ -362,23 +362,23 @@ COPY prjtrans.t_reservation (artiste, salle, statut, date_reservation, date_conc
 A-Wa	Parc des Expositions - Hall 3	acceptée	22/09/2014	05/12/2014	20
 A-Wa	Parc des Expositions - Green Room	acceptée	22/09/2014	06/12/2014	19
 Alphaat	Coatélan	acceptée	12/10/2014	29/11/2014	18
-Alsarah & The Nubatones	Ubu	en cours	15/10/2014	03/12/2014	22
+Alsarah & The Nubatones	Ubu	en attente	15/10/2014	03/12/2014	22
 Andre Bratten	Parc des Expositions - Green Room	refusée	03/09/2014	04/12/2014	23
 Animal Chuki	Parc des Expositions - Green Room	acceptée	28/09/2014	06/12/2014	20
 Awesome Tapes From Africa	Parc des Expositions - Hall 8	acceptée	27/09/2014	06/12/2014	21
 Bantam Lyons	Stereolux	acceptée	24/08/2014	20/11/2014	19
 Barnt + Aguayo	Parc des Expositions - Hall 9	refusée	14/10/2014	06/12/2014	17
-Big Buddha	Parc des Expositions - Hall 3	en cours	04/11/2014	05/12/2014	22
+Big Buddha	Parc des Expositions - Hall 3	en attente	04/11/2014	05/12/2014	22
 Bison Bisou	L Etage	acceptée	01/09/2014	04/11/2014	20
-Black Commando	Ubu	en cours	20/10/2014	07/12/2014	15
+Black Commando	Ubu	en attente	20/10/2014	07/12/2014	15
 Blutch	Parc des Expositions - Hall 9	acceptée	03/11/2014	06/12/2014	18
 Boris Brejcha	Parc des Expositions - Hall 9	refusée	16/09/2014	06/12/2014	23
 Chancha Via Circuito Feat. Miriam Garca	Ubu	acceptée	31/10/2014	06/12/2014	21
 Cie 6ème dimension	Espace Bel Air	acceptée	29/10/2014	28/11/2014	19
-Cie Rêvolution	Triangle	en cours	20/10/2014	05/11/2014	20
+Cie Rêvolution	Triangle	en attente	20/10/2014	05/11/2014	20
 Clap! Clap!	Parc des Expositions - Hall 8	acceptée	10/10/2014	06/12/2014	16
 Clarens	Parc des Expositions - Hall 8	acceptée	22/09/2014	04/12/2014	18
-Compact Disk Dummies	Parc des Expositions - Hall 3	en cours	03/11/2014	05/12/2014	21
+Compact Disk Dummies	Parc des Expositions - Hall 3	en attente	03/11/2014	05/12/2014	21
 Cosmo Sheldrake	Parc des Expositions - Hall 3	acceptée	12/09/2014	05/12/2014	23
 \.
 
