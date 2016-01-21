@@ -8,6 +8,10 @@ label {
 	text-align: right;
 }
 
+th {
+	text-align: center;
+}
+
 .label-required::after {
 	content: " (*)";
 }

@@ -316,7 +316,7 @@ COPY prjtrans.t_atm FROM STDIN;
 atm
 \.
 
-COPY prjtrans.t_responsable (id_resp, nom, prenom, mail, tel) FROM STDIN;
+COPY prjtrans.t_responsable (id_resp, prenom, nom, mail, tel) FROM STDIN;
 1	Amelia	Jackson	eu.odio.tristique@fringillamilacinia.net	04 88 88 74 96
 2	Ignacia	Davenport	amet.lorem.semper@non.co.uk	07 44 25 39 62
 3	Mufutau	Bird	semper@quis.edu	03 49 07 52 09
