@@ -3,6 +3,7 @@ class Main_Controller extends CI_Controller {
 	
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('Artiste_model');
 
 		global $data;
 		$login = $this->session->userdata('login');

@@ -22,15 +22,12 @@ class Reservation_model extends CI_Model {
 	}
 	
 	// Renvoie un array contenant les données des réservations répondant aux critères spécifiés
-	public function get($data_equal = null, $data_like = null, $select, $order_by = 'date_reservation') {
+	public function get($data_equal = null, $data_like = null, $order_by = 'date_reservation') {
 		if ($data_equal != null) {
 			$this->db->where($data_equal);
 		}
 		if ($data_like != null) {
 			$this->db->like($data_like);
-		}
-		if ($select != null) {
-			$this->db->select($select);
 		}
 		$this->db->order_by($order_by, 'ASC');
 		return $this->db->get('reservation')->result_array();

@@ -7,6 +7,7 @@ class Reservations extends Main_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Reservation_model');
+		$this->load->model('Inscription_model');
 	}
 	
 	public function index() {
@@ -16,18 +17,44 @@ class Reservations extends Main_Controller {
 		$this->load->view('header', $data);
 		
 		// Récupération des données
-		$data['array_data'] = $this->Reservation_model->get(array('statut' => 'en cours'));
-		$data['fields_metadata'] = $this->Reservation_model->getFieldsMetaData();
-		$data['array_headings'] = $this->Reservation_model->getFields();
-
-		//$this->perso->set_data_for_display('pilote', $data['array_data']);
+		$data['tableData'] = $this->Reservation_model->get(array('statut' => 'en attente'));
 		
-		$data['btnValider'] = true;
-		$data['btnRefuser'] = true;
-		$data['object'] = 'reservation';
+		// Suppression statut et mise en forme du créneau
+		$tableData = $data['tableData'];
+		foreach ($tableData as $key => $value) {
+			unset($tableData[$key]['statut']);
+			if ($tableData[$key]['heure_debut'] == 23)
+				$tableData[$key]['heure_debut'] = $tableData[$key]['heure_debut']."h - 0h";
+			else
+				$tableData[$key]['heure_debut'] = $tableData[$key]['heure_debut']."h - ".($tableData[$key]['heure_debut'] + 1)."h";
+		}
+		$data['tableData'] = $tableData;
+		
+		// Ajout du pays de l'artiste
+		foreach ($tableData as $key => $value) {
+			array_splice($data['tableData'][$key], 1, 0, $this->Inscription_model->get(array('nom' => $data['tableData'][$key]['artiste']))[0]['origine']);
+		}
 
-		$this->load->view('table', $data);
+		$data['fieldsMetadata'] = $this->Reservation_model->getFieldsMetaData();
+		
+		// Temporaire
+		foreach ($data['tableData'][0] as $key => $value) {
+			$data['headings'][] = $key;
+		}
+
+		$this->load->view('tables/confReservations', $data);
 		
 		$this->load->view('footer', $data);
+	}
+
+	public function valider($artiste, $salle) {
+		$artiste = urldecode($artiste);
+		$salle = urldecode($salle);
+		$this->Reservation_model->update(array('artiste' => $artiste, 'salle' => $salle), array('statut' => 'acceptée'));
+		redirect();
+	}
+
+	public function refuser() {
+		redirect();
 	}
 }
