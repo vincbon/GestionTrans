@@ -52,4 +52,9 @@ class Reservation_model extends CI_Model {
 	public function add($data) {
 		$this->db->insert('reservation', $data);
 	}
+
+	// Met à jour les informations de la réservation caractériée par $artisteSalle avec les nouvelles informations contenues dans $data.
+	public function update($artisteSalle, $data) {
+		$this->db->update('reservation', $data, $artisteSalle);
+	}
 }

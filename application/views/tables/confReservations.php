@@ -41,29 +41,37 @@ $tableData = $tableDataTmp;
 <div class="container col-md-10 col-md-offset-1">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title"><span class="glyphicon glyphicon-list"></span> <?php echo $title; ?></span>
+			<span class="panel-title"><?php echo $title; ?></span>
 		</div>
-		<table class="table table-bordered table-striped table-condensed">
-			<tr>
-				<?php foreach ($headings as $heading) : ?>
-					<th><?php echo $heading; ?></th>
-				<?php endforeach ?>
-				<?php echo "<th></th><th></th>"; ?>
-			</tr>
-			<?php foreach ($tableData as $row) : ?>
-				<tr id="reservation_<?php echo $row[0] ?>" class="trb">
-					<?php foreach ($row as $fieldNum => $fieldValue) : ?>
-						<td id="reservation_<?php echo $row[0].'_'.$fieldsMetadata[$fieldNum]['name'] ?>"><?php echo $fieldValue; ?></td>
+		<?php if (empty($tableData)) : ?>
+			<p class="message-empty-table">Il n'y a aucune réservation en attente de validation...</p>
+		<?php else : ?>
+			<table class="table table-bordered table-striped table-condensed">
+				<tr>
+					<?php foreach ($headings as $heading) : ?>
+						<th><?php echo $heading; ?></th>
 					<?php endforeach ?>
-					<td>
-						<a href="<?php echo site_url()."/reservations/valider/".htmlspecialchars($row[0])."/".htmlspecialchars($row[2]) ?>">
-							<button type="button" id="valider_<?php echo $row[0] ?>" class="btn btn-success btn-sm" data-dismiss="modal">Valider</button>
-						</a>
-					</td>
-					<td><button type="button" id="valider_<?php echo $row[0] ?>" class="btn btn-danger btn-sm" data-dismiss="modal">Refuser</button></td>
+					<?php echo "<th colspan=2></th>"; ?>
 				</tr>
-			<?php endforeach ?>
-		</table>
+				<?php foreach ($tableData as $row) : ?>
+					<tr class="trb">
+						<?php foreach ($row as $fieldNum => $fieldValue) : ?>
+							<td><?php echo $fieldValue; ?></td>
+						<?php endforeach ?>
+						<td>
+							<a href="<?php echo site_url()."/reservations/valider/".$row[0]."/".$row[2] ?>">
+								<button type="button" id="valider_<?php echo $row[0] ?>" class="btn btn-success btn-sm">Valider</button>
+							</a>
+						</td>
+						<td>
+							<a href="<?php echo site_url()."/reservations/refuser/".$row[0]."/".$row[2] ?>">
+								<button type="button" id="refuser_<?php echo $row[0] ?>" class="btn btn-danger btn-sm">Refuser</button>
+							</a>
+						</td>
+					</tr>
+				<?php endforeach ?>
+			</table>
+		<?php endif; ?>
 		<div class="panel-footer">
 			<p class="help-block"><em>Total : <?php echo count($tableData); ?></em></p>
 		</div>

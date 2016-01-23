@@ -8,6 +8,8 @@ class Reservations extends Main_Controller {
 		parent::__construct();
 		$this->load->model('Reservation_model');
 		$this->load->model('Inscription_model');
+		$this->load->library('form_validation');
+		$this->load->helper('form');
 	}
 	
 	public function index() {
@@ -23,10 +25,11 @@ class Reservations extends Main_Controller {
 		$tableData = $data['tableData'];
 		foreach ($tableData as $key => $value) {
 			unset($tableData[$key]['statut']);
-			if ($tableData[$key]['heure_debut'] == 23)
+			if ($tableData[$key]['heure_debut'] == 23) {
 				$tableData[$key]['heure_debut'] = $tableData[$key]['heure_debut']."h - 0h";
-			else
+			} else {
 				$tableData[$key]['heure_debut'] = $tableData[$key]['heure_debut']."h - ".($tableData[$key]['heure_debut'] + 1)."h";
+			}
 		}
 		$data['tableData'] = $tableData;
 		
@@ -38,8 +41,10 @@ class Reservations extends Main_Controller {
 		$data['fieldsMetadata'] = $this->Reservation_model->getFieldsMetaData();
 		
 		// Temporaire
-		foreach ($data['tableData'][0] as $key => $value) {
-			$data['headings'][] = $key;
+		if (!empty($data['tableData'])) {
+			foreach ($data['tableData'][0] as $key => $value) {
+				$data['headings'][] = $key;
+			}
 		}
 
 		$this->load->view('tables/confReservations', $data);
@@ -54,7 +59,28 @@ class Reservations extends Main_Controller {
 		redirect();
 	}
 
-	public function refuser() {
-		redirect();
+	public function refuser($artiste, $salle) {
+		global $data;
+		$artiste = urldecode($artiste);
+		$salle = urldecode($salle);
+
+		$data['title'] = 'Refuser une réservation';
+		$data['artiste'] = $artiste;
+		$data['salle'] = $salle;
+
+		$this->load->view('header', $data);
+
+		$this->form_validation->set_rules('justificatif', 'Justificatif', 'required');
+
+		$this->form_validation->set_message('required', $this->lang->line('error_field_required'));
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('form/refusReservation', $data);
+		} else {
+			$this->Reservation_model->update(array('artiste' => $artiste, 'salle' => $salle), array('statut' => 'refusée'));
+			redirect();
+		}
+
+		$this->load->view('footer', $data);
 	}
 }

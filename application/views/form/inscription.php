@@ -1,4 +1,4 @@
-<div id="inscription_container" class="container">
+<div id="inscription_container" class="container col-md-offset-1 col-md-10">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span class="panel-title">Inscription artiste/groupe</span>
@@ -7,7 +7,7 @@
 			<?php 
 			$attributes = array(
 				'id'	=>	'inscription_form',
-				'class' =>	'col-md-offset-3 col-md-5',
+				'class' =>	'col-md-offset-2 col-md-8',
 			);
 			echo form_open('inscription', $attributes);
 

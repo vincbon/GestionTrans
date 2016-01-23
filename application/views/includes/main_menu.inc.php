@@ -6,7 +6,7 @@
 	<ul id="menu-app" class="nav navbar-nav">
 		<?php if ($user_connected) : ?>
 			<?php if ($atm_connected) : ?>
-				<li><a href="<?php echo site_url("???"); ?>"><span class="glyphicon glyphicon-list-alt"></span> Réservations en attente</a></li>
+				<li><a href="<?php echo site_url("reservations"); ?>">Réservations en attente</a></li>
 			<?php else : ?>
 			
 			<?php endif; ?>
@@ -16,14 +16,14 @@
 	</ul>
 	<ul id="menu-user" class="nav navbar-nav pull-right">
 		<?php if ($user_connected) : ?>
-			<li><?php 
+			<li id="user_pseudo"><?php 
 				if ($user_login == 'atm') 
 					echo $user_login;
 				else 
 					echo $this->Artiste_model->get(array('login' => $user_login))[0]['nom'];
 				?>
 			</li>
-			<li><a href="<?php echo site_url("connexion/logout"); ?>"><i class="fa fa-power-off"></i></a></li>
+			<li id="btn-logout"><a href="<?php echo site_url("connexion/logout"); ?>"><i class="fa fa-power-off"></i></a></li>
 		<?php else : ?>
 			<?php if ($this->router->fetch_class() == "inscription") : ?>
 				<li><a href="<?php echo site_url("connexion"); ?>">Connexion</a></li>
