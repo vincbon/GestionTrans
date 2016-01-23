@@ -17,6 +17,10 @@ td button {
 	height: 100%;
 }
 
+.control-label {
+	padding-top: 5px;
+}
+
 .label-required::after {
 	content: " (*)";
 }
@@ -27,6 +31,14 @@ td button {
 
 .panel-title {
 	font-weight: bold;
+}
+
+.panel-success .panel-heading {
+	text-align: center;
+}
+
+.panel-success .panel-title {
+	font-size: xx-large;
 }
 
 .btn {
@@ -83,8 +95,54 @@ td button {
 	padding: 5px 0;
 }
 
+
 /* INSCRIPTION */
 
+
+/* RECHERCHE DE SALLE */
+
+#noResultFound {
+	font-weight: bold;
+	text-align: center;
+}
+
+
+/* RESERVATION DE SALLE */
+
+#submitBooking {
+	margin-top: 15px;
+}
+
+#booking-error {
+	text-align: center;
+	font-weight: bold;
+}
+
+#booking-success p {
+	text-align: justify;
+}
+
+#booking-success-title {
+	text-align: center;
+	font-weight: bold;
+	font-size: x-large;
+	padding-bottom: 10px;
+}
+
+#booking-success-pending {
+	font-weight: bold;
+	color: blue;
+}
+
+#booking-success-valid {
+	font-weight: bold;
+	color: green;
+}
+
+#booking-success-denied {
+	font-weight: bold;
+	color: red;
+}
 
 /* TMP */
 

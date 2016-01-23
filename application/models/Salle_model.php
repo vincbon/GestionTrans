@@ -35,8 +35,8 @@ class Salle_model extends CI_Model {
 		return $this->db->get('salle')->result_array();
 	}
 
-	// Renvoie un array contenant les données des salles répondant aux critères spécifiés
-	public function getTemp($salles, $capaciteMin, $capaciteMax) {
+	// Filtre les salles spécifiés selon les valeurs de capacité spécifiés.
+	public function filterCapacite($salles, $capaciteMin, $capaciteMax) {
 		$newSalles = array();
 
 		foreach ($salles as $salle) {

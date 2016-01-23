@@ -9,6 +9,7 @@ class Salles extends Main_Controller {
 		$this->load->model('Salle_model');
 		$this->load->model('Reservation_model');
 		$this->load->model('Responsable_model');
+		$this->load->model('Artiste_model');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 	}
@@ -19,7 +20,6 @@ class Salles extends Main_Controller {
 		
 		$this->load->view('header', $data);
 		
-		$this->form_validation->run();
 		$this->load->view('form/rechercheSalles', $data);
 		if (!empty($_GET)) {
 			$this->display_salles();
@@ -32,7 +32,52 @@ class Salles extends Main_Controller {
 		$data['headings'] = array('Nom', 'Adresse', 'Ville', 'Code postal', 'Coordonnées du responsable');
 		$data['tableData'] = $this->getTableData($data);
 
-		$this->load->view('tableRechercheSalle', $data);
+		$this->load->view('tables/sallesDisponibles', $data);
+	}
+
+	public function reserverSalle($salle) {
+		global $data;
+		$data['title'] = 'Réserver une salle';
+		$data['salle'] = str_replace("_", " ", urldecode($salle));
+
+		$this->load->view('header', $data);
+
+		$this->form_validation->set_rules('date_concert', 'Date', 'required');
+		$this->form_validation->set_rules('heure_debut', 'Créneau horaire', 'greater_than_equal_to[0]');
+
+		$this->form_validation->set_message('required', $this->lang->line('error_field_required'));
+		$this->form_validation->set_message('greater_than_equal_to', $this->lang->line('error_creneau_valid'));
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('form/reservationSalle', $data);
+		} else {
+			$artiste = $this->Artiste_model->getName($data['user_login']);
+			$salleDejaUtilisee = $this->Reservation_model->bookingExists(array('artiste' => $artiste, 'salle' => $_POST['salle']));
+			if ($salleDejaUtilisee) {
+				$this->load->view('form/reservationSalle', $data);
+				$data['errorText'] = $this->lang->line('error_salle_deja_utilisee');
+				$this->load->view('errors/reservationSalleImpossible', $data);
+			} else {
+				$artisteDejaPris = $this->Reservation_model->bookingExists(array('artiste' => $artiste, 'date_concert' => $_POST['date_concert'], 'heure_debut' => $_POST['heure_debut']));
+				if ($artisteDejaPris) {
+					$this->load->view('form/reservationSalle', $data);
+					$data['errorText'] = $this->lang->line('error_artiste_deja_pris');
+					$this->load->view('errors/reservationSalleImpossible', $data);
+				} else {
+					$salleDejaPrise = $this->Reservation_model->bookingExists(array('salle' => $_POST['salle'], 'date_concert' => $_POST['date_concert'], 'heure_debut' => $_POST['heure_debut']));;
+					if ($salleDejaPrise) {
+						$this->load->view('form/reservationSalle', $data);
+						$data['errorText'] = $this->lang->line('error_salle_deja_prise');
+						$this->load->view('errors/reservationSalleImpossible', $data);
+					} else {
+						$this->Reservation_model->add($_POST, $artiste);
+						$this->load->view('reservationSalleEnregistree');
+					}
+				}
+			}
+		}
+
+		$this->load->view('footer', $data);
 	}
 
 	private function getTableData($data) {
@@ -70,7 +115,7 @@ class Salles extends Main_Controller {
 				$capaciteMax = null;
 				break;
 		}
-		$salles = $this->Salle_model->getTemp($salles, $capaciteMin, $capaciteMax);
+		$salles = $this->Salle_model->filterCapacite($salles, $capaciteMin, $capaciteMax);
 
 		// Filtrage des salles trouvées avec la date et l'heure spécifiées pour la réservation
 		$date = null;

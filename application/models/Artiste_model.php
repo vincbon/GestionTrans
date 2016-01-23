@@ -30,6 +30,12 @@ class Artiste_model extends CI_Model {
 		return $this->db->get('artiste')->result_array();
 	}
 
+	// Renvoie le nom de l'artiste de login $login
+	public function getName($login) {
+		$this->db->where(array('login' => $login));
+		$artiste = $this->db->get('artiste')->row_array();
+		return $artiste['nom'];
+	}
 
 	// Renvoie vrai si le couple login/nom existe, faux sinon
 	// Peut aussi rechercher si un login ou un nom seulement existe

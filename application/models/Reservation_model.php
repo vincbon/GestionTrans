@@ -47,9 +47,19 @@ class Reservation_model extends CI_Model {
 
 		return $sallesLibres;
 	}
+
+	// Renvoie vrai si au moins une réservation répondant aux critères spécifiés existe.
+	public function bookingExists($data) {
+		$this->db->where($data);
+		$this->db->from('reservation');
+		return $this->db->count_all_results() == 1;
+	}
 	
 	// Ajoute une réservation dans la base de données avec les informations contenues dans $data.
-	public function add($data) {
+	public function add($data, $artiste) {
+		$data['artiste'] = $artiste;
+		$data['statut'] = 'en attente';
+		$data['date_reservation'] = date('d-m-Y', time());
 		$this->db->insert('reservation', $data);
 	}
 }

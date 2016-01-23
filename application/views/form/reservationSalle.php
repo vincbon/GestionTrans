@@ -1,22 +1,20 @@
 <?php
-	$tailleLabel = 5;
+	$tailleLabel = 4;
 ?>
 
-<div class="container col-md-10 col-md-offset-1">
+<div class="container col-md-6 col-md-offset-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title clearfix large"><span class="glyphicon glyphicon-search"></span> Étape 1 : Rechercher des salles disponibles</span>
+			<span class="panel-title clearfix large"><span class="glyphicon glyphicon-star"></span> Étape 3 : Réserver !</span>
 		</div>
 		<div class="panel-body">
-			<?php
-				$attributes = array(
-					'method'	=> 'GET'
-				);
-				echo form_open('salles', $attributes);
-			?>
-			<div class="form-group col-md-5 col-md-offset-1">
+			<div class="col-md-10 col-md-offset-1">
+				<?php echo form_open("salles/reserverSalle/$salle"); ?>
+
 				<!-- Nom de la salle -->
-				<?php $critere = 'nom'; ?>
+				<?php 
+					$critere = 'salle';
+				?>
 				<div class="form-group">
 					<?php
 						$attributes = array(
@@ -30,9 +28,8 @@
 								'id'		=> $critere,
 								'name'		=> $critere,
 								'class'		=> 'form-control',
-								'maxlength' => '60',
-								'value'		=> set_value($critere),
-								'autofocus' => TRUE
+								'value'		=> $salle,
+								'readonly' 	=> TRUE
 							);
 							echo form_input($attributes);
 						?>
@@ -40,7 +37,7 @@
 				</div>
 
 				<!-- Date de concert -->
-				<?php $critere = 'date'; ?>
+				<?php $critere = 'date_concert'; ?>
 				<div class="form-group">
 					<?php
 						$attributes = array(
@@ -54,6 +51,7 @@
 								'id'		=> $critere,
 								'name'		=> $critere,
 								'class'		=> 'form-control',
+								'value'		=> set_value($critere)
 							);
 							echo form_input($attributes);
 						?>
@@ -61,10 +59,11 @@
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
 					</div>
+					<span class="col-md-7 col-md-offset-<?php echo $tailleLabel ?>"><?php echo form_error($critere); ?></span>
 				</div>
 
 				<!-- Créneau horaire -->
-				<?php $critere = 'creneau'; ?>
+				<?php $critere = 'heure_debut'; ?>
 				<div class="form-goup">
 					<?php
 						$attributes = array(
@@ -102,61 +101,10 @@
 								'10'	=> '10h - 11h',
 								'11'	=> '11h - 12h',
 							);
-							echo form_dropdown($critere, $options, '-1', $attributes);
+							echo form_dropdown($critere, $options, set_value($critere), $attributes);
 						?>
 					</div>
-				</div>
-			</div>
-
-			<div class="form-group col-md-5">
-				<!-- Capacité -->
-				<?php
-					$critere = 'capacite';
-				?>
-				<div class="form-group">
-					<?php
-						$attributes = array(
-							'class'		=> "control-label col-md-$tailleLabel"
-						);
-						echo form_label('Capacité', $critere, $attributes);
-					?>
-					<div class="input-group col-md-7">
-						<?php
-							$attributes = 'class="form-control"';
-							$options = array(
-								'toutes'	=> 'Toutes',
-								'0_100'		=> 'Moins de 100 places',
-								'100_500'	=> 'Entre 100 et 500 places',
-								'500_1000'	=> 'Entre 500 et 1000 places',
-								'1000+'		=> 'Plus de 1000 places'
-							);
-							echo form_dropdown($critere, $options, 'toutes', $attributes);
-						?>
-					</div>
-				</div>
-
-				<!-- Accès handicap -->
-				<?php
-					$critere = 'acces_handicap';
-				?>
-				<div class="form-group">
-					<?php
-						$attributes = array(
-							'class'		=> "control-label col-md-$tailleLabel"
-						);
-						echo form_label('Accès handicap', $critere, $attributes);
-					?>
-					<div class="input-group col-md-7">
-						<?php
-							$attributes = array(
-								'id'		=> $critere,
-								'name'		=> $critere,
-								'value'		=> 'true',
-								'checked'	=> FALSE
-							);
-							echo form_checkbox($attributes);
-						?>
-					</div>
+					<span class="col-md-7 col-md-offset-<?php echo $tailleLabel ?>"><?php echo form_error($critere); ?></span>
 				</div>
 
 				<!-- Bouton de validation -->
@@ -165,15 +113,17 @@
 					<div class="submit-container">
 						<?php 
 							$attributes = array(
+								'id'		=> 'submitBooking',
 								'class'		=> 'btn btn-primary',
-								'value'		=> 'Rechercher'
+								'value'		=> 'Réserver'
 							);
 							echo form_submit($attributes);
 						?>
 					</div>
 				</div>
+
+				<?php echo form_close(); ?>
 			</div>
-			<?php echo form_close(); ?>
 		</div>
 	</div>
 </div>
