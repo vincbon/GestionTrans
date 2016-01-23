@@ -16,7 +16,7 @@ class Connexion extends Main_Controller {
 
 		if ($data['user_connected']) redirect();
 
-		$data['title'] = 'Connexion';
+		$data['title'] = $this->lang->line('connexion_title');
 		$this->load->view('header', $data);
 		
 		$this->form_validation->set_rules('login', 'Pseudo', 'required', 

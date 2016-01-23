@@ -1,7 +1,7 @@
 <div id="connexion_container" class="container col-md-offset-4 col-md-4">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title">Bienvenue !</span>
+			<span class="panel-title"><?= $this->lang->line('connexion_panel_title') ?></span>
 		</div>
 		<div class="panel-body">
 			<?php 
@@ -19,7 +19,7 @@
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
 					'value'	=>	set_value($input_name),
-					'placeholder' => 'Pseudo',
+					'placeholder' => $this->lang->line('connexion_plholder_name'),
 				);
 				echo form_input($attributes);
 				echo form_error($input_name);
@@ -33,7 +33,7 @@
 				$attributes = array(
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
-					'placeholder' => 'Mot de passe',
+					'placeholder' => $this->lang->line('connexion_plholder_pass'),
 				);
 				echo form_password($attributes);
 				echo form_error($input_name);
@@ -49,7 +49,7 @@
 				$attributes = array(
 					'id'	=>	'submit_connexion',
 					'class'	=>	'btn btn-primary',
-					'value'	=>	'Connexion',
+					'value'	=>	$this->lang->line('connexion_btn_submit'),
 				);
 				echo form_submit($attributes);
 				?>
@@ -58,8 +58,8 @@
 			<?php echo form_close(); ?>
 		</div>
 		<div class="panel-footer">
-			<p class="help-block"><em>Pas encore inscrit ? <a href="<?php echo site_url("inscription"); ?>" >S'inscrire</a></em></p>
-			<p class="help-block"><em>Mot de passe oublié ? <a href="<?php echo site_url(); ?>" >Cliquez-ici</a></em></p>
+			<p class="help-block"><em><?= $this->lang->line('connexion_not_registered') ?> <a href="<?php echo site_url("inscription"); ?>"><?= $this->lang->line('connexion_not_registered_action') ?></a></em></p>
+			<p class="help-block"><em><?= $this->lang->line('connexion_forgot_pass') ?> <a href="<?php echo site_url(); ?>" ><?= $this->lang->line('connexion_forgot_pass_action') ?></a></em></p>
 		</div>
 	</div>
 </div>

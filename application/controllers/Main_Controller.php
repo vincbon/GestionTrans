@@ -11,9 +11,18 @@ class Main_Controller extends CI_Controller {
 		$data['atm_connected'] = ($login == 'atm');
 		$data['user_login'] = $login;
 
-		$lang_files = array('error');
+		$lang_files = array(
+			'common', 
+			'error', 
+			'menu', 
+			'connexion', 
+			'inscription', 
+			'reservAttentes',
+			'reservRefus',
+		);
 		$language = $this->session->userdata('lang');
 		if ($language == null) $language = 'fr';
 		$this->lang->load($lang_files, $language);
+		$data['user_language'] = $language;
 	}
 }
