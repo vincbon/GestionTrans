@@ -17,7 +17,7 @@ class Inscription extends Main_Controller {
 		
 		if ($data['user_connected']) redirect();
 
-		$data['title'] = 'Inscription';
+		$data['title'] = $this->lang->line('inscription_title');
 		$this->load->view('header', $data);
 		
 		$this->form_validation->set_rules('nom', 'Nom', 'required');
@@ -34,7 +34,7 @@ class Inscription extends Main_Controller {
 		
 		if ($this->form_validation->run() == false) {
 			$this->load->view('form/inscription', $data);
-		} else if ($this->Inscription_model->exist($_POST['nom'])) {
+		} else if ($this->Inscription_model->exist($_POST['nom']) || $_POST['nom'] == 'atm') {
 			$data['username_taken'] = true;
 			$this->load->view('form/inscription', $data);
 		} else {

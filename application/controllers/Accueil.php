@@ -15,6 +15,10 @@ class Accueil extends Main_controller {
 		} else {
 			redirect('connexion');
 		}
-		
+	}
+
+	public function lang($lang) {
+		$this->session->set_userdata('lang', $lang);
+		redirect();
 	}
 }

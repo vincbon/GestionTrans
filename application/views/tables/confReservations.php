@@ -21,9 +21,14 @@ if (isset($bool_fields) && !empty($bool_fields)) {
 }
 
 if (isset($date_fields) && !empty($date_fields)) {
+	if ($user_language == 'en') {
+		$dateFormat = 'm/d/Y';
+	} else {
+		$dateFormat = 'd/m/Y';
+	}
 	foreach ($tableData as $num_row => $row) {
 		foreach ($date_fields as $field_name) {
-			$tableData[$num_row][$field_name] = date('d/m/Y', strtotime($row[$field_name]));
+			$tableData[$num_row][$field_name] = date($dateFormat, strtotime($row[$field_name]));
 		}
 	}
 }
@@ -41,16 +46,16 @@ $tableData = $tableDataTmp;
 <div class="container col-md-10 col-md-offset-1">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title"><?php echo $title; ?></span>
+			<span class="panel-title"><?= $this->lang->line('reservAttentes_panel_title') ?></span>
 		</div>
 		<?php if (empty($tableData)) : ?>
-			<p class="message-empty-table">Il n'y a aucune réservation en attente de validation...</p>
+			<p class="message-empty-table"><?= $this->lang->line('common_msg_empty_table') ?></p>
 		<?php else : ?>
 			<table class="table table-bordered table-striped table-condensed">
 				<tr>
-					<?php foreach ($headings as $heading) : ?>
-						<th><?php echo $heading; ?></th>
-					<?php endforeach ?>
+					<?php for($i=0; $i < 6; $i++) : ?>
+						<th><?= $this->lang->line('reservAttentes_heading_'.$i) ?></th>
+					<?php endfor ?>
 					<?php echo "<th colspan=2></th>"; ?>
 				</tr>
 				<?php foreach ($tableData as $row) : ?>
@@ -60,12 +65,12 @@ $tableData = $tableDataTmp;
 						<?php endforeach ?>
 						<td>
 							<a href="<?php echo site_url()."/reservations/valider/".$row[0]."/".$row[2] ?>">
-								<button type="button" id="valider_<?php echo $row[0] ?>" class="btn btn-success btn-sm">Valider</button>
+								<button type="button" id="valider_<?php echo $row[0] ?>" class="btn btn-success btn-sm"><?= $this->lang->line('reservAttentes_btn_valider') ?></button>
 							</a>
 						</td>
 						<td>
 							<a href="<?php echo site_url()."/reservations/refuser/".$row[0]."/".$row[2] ?>">
-								<button type="button" id="refuser_<?php echo $row[0] ?>" class="btn btn-danger btn-sm">Refuser</button>
+								<button type="button" id="refuser_<?php echo $row[0] ?>" class="btn btn-danger btn-sm"><?= $this->lang->line('reservAttentes_btn_refuser') ?></button>
 							</a>
 						</td>
 					</tr>
@@ -73,7 +78,7 @@ $tableData = $tableDataTmp;
 			</table>
 		<?php endif; ?>
 		<div class="panel-footer">
-			<p class="help-block"><em>Total : <?php echo count($tableData); ?></em></p>
+			<p class="help-block"><em>Total : <?= count($tableData); ?></em></p>
 		</div>
 	</div>
 </div>

@@ -15,7 +15,7 @@ class Reservations extends Main_Controller {
 	public function index() {
 		global $data;
 
-		$data['title'] = 'Réservations en attente';
+		$data['title'] = $this->lang->line('reservAttentes_title');
 		$this->load->view('header', $data);
 		
 		// Récupération des données
@@ -39,13 +39,6 @@ class Reservations extends Main_Controller {
 		}
 
 		$data['fieldsMetadata'] = $this->Reservation_model->getFieldsMetaData();
-		
-		// Temporaire
-		if (!empty($data['tableData'])) {
-			foreach ($data['tableData'][0] as $key => $value) {
-				$data['headings'][] = $key;
-			}
-		}
 
 		$this->load->view('tables/confReservations', $data);
 		
@@ -64,7 +57,7 @@ class Reservations extends Main_Controller {
 		$artiste = urldecode($artiste);
 		$salle = urldecode($salle);
 
-		$data['title'] = 'Refuser une réservation';
+		$data['title'] = $this->lang->line('reservRefus_title');
 		$data['artiste'] = $artiste;
 		$data['salle'] = $salle;
 

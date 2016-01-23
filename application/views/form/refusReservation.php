@@ -2,6 +2,12 @@
 // Récupération des infos supplémentaires
 $reservation = $this->Reservation_model->get(array('artiste' => $artiste, 'salle' => $salle))[0];
 $date = $reservation['date_concert'];
+if ($user_language == 'en') {
+	$dateFormat = 'm/d/Y';
+} else {
+	$dateFormat = 'd/m/Y';
+}
+$date = date($dateFormat, strtotime($date));
 
 if ($reservation['heure_debut'] == 23) {
 	$creneau = $reservation['heure_debut']."h - 0h";
@@ -13,7 +19,7 @@ if ($reservation['heure_debut'] == 23) {
 <div id="refusReservation_container" class="container col-md-offset-2 col-md-8">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title">Refuser une réservation</span>
+			<span class="panel-title"><?= $this->lang->line('reservRefus_panel_title') ?></span>
 		</div>
 		<div class="panel-body">
 			<?php 
@@ -33,7 +39,7 @@ if ($reservation['heure_debut'] == 23) {
 				$attributes = array(
 					'class'	=>	'control-label '.$label_size,
 				);
-				echo form_label('Artiste', $input_name, $attributes);
+				echo form_label($this->lang->line('reservRefus_label_'.$input_name), $input_name, $attributes);
 				$attributes = array(
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
@@ -51,7 +57,7 @@ if ($reservation['heure_debut'] == 23) {
 				$attributes = array(
 					'class'	=>	'control-label '.$label_size,
 				);
-				echo form_label('Salle', $input_name, $attributes);
+				echo form_label($this->lang->line('reservRefus_label_'.$input_name), $input_name, $attributes);
 				$attributes = array(
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
@@ -69,7 +75,7 @@ if ($reservation['heure_debut'] == 23) {
 				$attributes = array(
 					'class'	=>	'control-label '.$label_size,
 				);
-				echo form_label('Date', $input_name, $attributes);
+				echo form_label($this->lang->line('reservRefus_label_'.$input_name), $input_name, $attributes);
 				$attributes = array(
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
@@ -87,7 +93,7 @@ if ($reservation['heure_debut'] == 23) {
 				$attributes = array(
 					'class'	=>	'control-label '.$label_size,
 				);
-				echo form_label('Créneau horaire', $input_name, $attributes);
+				echo form_label($this->lang->line('reservRefus_label_'.$input_name), $input_name, $attributes);
 				$attributes = array(
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
@@ -105,7 +111,7 @@ if ($reservation['heure_debut'] == 23) {
 				$attributes = array(
 					'class'	=>	'control-label label-required '.$label_size,
 				);
-				echo form_label('Justificatif', $input_name, $attributes);
+				echo form_label($this->lang->line('reservRefus_label_'.$input_name), $input_name, $attributes);
 				$attributes = array(
 					'id'	=>	$input_name,
 					'name'	=>	$input_name,
@@ -123,19 +129,19 @@ if ($reservation['heure_debut'] == 23) {
 				$attributes = array(
 					'id'	=>	'refusReservation_submit',
 					'class'	=>	'btn btn-primary '.$label_offset,
-					'value'	=>	'Refuser',
+					'value'	=>	$this->lang->line('reservRefus_btn_submit'),
 				);
 				echo form_submit($attributes);
 				?>
 				<a href="<?php echo site_url() ?>">
-					<button type="button" class="btn btn-default">Annuler</button>
+					<button type="button" class="btn btn-default"><?= $this->lang->line('reservRefus_btn_abort') ?></button>
 				</a>
 			</div>
 			
 			<?php echo form_close(); ?>
 		</div>
 		<div class="panel-footer">
-			<p class="help-block"><em>(*) : champs obligatoire</em></p>
+			<p class="help-block"><em>(*) : <?= $this->lang->line('common_msg_required_field') ?></em></p>
 		</div>
 	</div>
 </div>
