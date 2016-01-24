@@ -1,16 +1,16 @@
 <?php
 
 $lang['time_slot_all']	= 'All';
-$lang['time_slot_00']	= '12pm - 01am';
-$lang['time_slot_01']	= '01am - 02am';
-$lang['time_slot_02']	= '02am - 03am';
-$lang['time_slot_03']	= '03am - 04am';
-$lang['time_slot_04']	= '04am - 05am';
-$lang['time_slot_05']	= '05am - 06am';
-$lang['time_slot_06']	= '06am - 07am';
-$lang['time_slot_07']	= '07am - 08am';
-$lang['time_slot_08']	= '08am - 09am';
-$lang['time_slot_09']	= '09am - 10am';
+$lang['time_slot_0']	= '12pm - 01am';
+$lang['time_slot_1']	= '01am - 02am';
+$lang['time_slot_2']	= '02am - 03am';
+$lang['time_slot_3']	= '03am - 04am';
+$lang['time_slot_4']	= '04am - 05am';
+$lang['time_slot_5']	= '05am - 06am';
+$lang['time_slot_6']	= '06am - 07am';
+$lang['time_slot_7']	= '07am - 08am';
+$lang['time_slot_8']	= '08am - 09am';
+$lang['time_slot_9']	= '09am - 10am';
 $lang['time_slot_10']	= '10am - 11am';
 $lang['time_slot_11']	= '11am - 12am';
 $lang['time_slot_12']	= '12am - 01pm';

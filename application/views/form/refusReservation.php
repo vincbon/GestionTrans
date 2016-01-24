@@ -9,11 +9,7 @@ if ($user_language == 'en') {
 }
 $date = date($dateFormat, strtotime($date));
 
-if ($reservation['heure_debut'] == 23) {
-	$creneau = $reservation['heure_debut']."h - 0h";
-} else {
-	$creneau = $reservation['heure_debut']."h - ".($reservation['heure_debut'] + 1)."h";
-}
+$creneau = $this->lang->line('time_slot_'.$reservation['heure_debut']);
 
 ?>
 <div id="refusReservation_container" class="container col-md-offset-2 col-md-8">

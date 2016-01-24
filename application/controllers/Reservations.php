@@ -25,11 +25,7 @@ class Reservations extends Main_Controller {
 		$tableData = $data['tableData'];
 		foreach ($tableData as $key => $value) {
 			unset($tableData[$key]['statut']);
-			if ($tableData[$key]['heure_debut'] == 23) {
-				$tableData[$key]['heure_debut'] = $tableData[$key]['heure_debut']."h - 0h";
-			} else {
-				$tableData[$key]['heure_debut'] = $tableData[$key]['heure_debut']."h - ".($tableData[$key]['heure_debut'] + 1)."h";
-			}
+			$tableData[$key]['heure_debut'] = $this->lang->line('time_slot_'.$tableData[$key]['heure_debut']);
 		}
 		$data['tableData'] = $tableData;
 		
