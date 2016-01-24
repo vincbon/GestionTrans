@@ -16,7 +16,7 @@ class Salles extends Main_Controller {
 	
 	public function index() {
 		global $data;
-		$data['title'] = 'Rechercher une salle';
+		$data['title'] = $this->lang->line('rechercheSalle_title');
 		
 		$this->load->view('header', $data);
 		
@@ -29,7 +29,7 @@ class Salles extends Main_Controller {
 	}
 	
 	public function display_salles() {
-		$data['headings'] = array('Nom', 'Adresse', 'Ville', 'Code postal', 'Coordonnées du responsable');
+		global $data;
 		$data['tableData'] = $this->getTableData($data);
 
 		$this->load->view('tables/sallesDisponibles', $data);
@@ -37,7 +37,7 @@ class Salles extends Main_Controller {
 
 	public function reserverSalle($salle) {
 		global $data;
-		$data['title'] = 'Réserver une salle';
+		$data['title'] = $this->lang->line('reservationSalle_title');
 		$data['salle'] = str_replace("_", " ", urldecode($salle));
 
 		$this->load->view('header', $data);
@@ -115,7 +115,7 @@ class Salles extends Main_Controller {
 				$capaciteMax = null;
 				break;
 		}
-		$salles = $this->Salle_model->filterCapacite($salles, $capaciteMin, $capaciteMax);
+		$salles = $this->Salle_model->filterCapacity($salles, $capaciteMin, $capaciteMax);
 
 		// Filtrage des salles trouvées avec la date et l'heure spécifiées pour la réservation
 		$date = null;

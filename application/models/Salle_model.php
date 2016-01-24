@@ -36,7 +36,7 @@ class Salle_model extends CI_Model {
 	}
 
 	// Filtre les salles spécifiés selon les valeurs de capacité spécifiés.
-	public function filterCapacite($salles, $capaciteMin, $capaciteMax) {
+	public function filterCapacity($salles, $capaciteMin, $capaciteMax) {
 		$newSalles = array();
 
 		foreach ($salles as $salle) {

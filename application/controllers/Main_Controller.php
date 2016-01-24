@@ -19,6 +19,10 @@ class Main_Controller extends CI_Controller {
 			'inscription', 
 			'reservAttentes',
 			'reservRefus',
+			'rechercheSalle',
+			'reservationSalle',
+			'reservationEnregistree',
+			'time_slot',
 		);
 		$language = $this->session->userdata('lang');
 		if ($language == null) $language = 'fr';

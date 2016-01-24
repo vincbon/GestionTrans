@@ -5,7 +5,7 @@
 <div class="container col-md-6 col-md-offset-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="panel-title clearfix large"><span class="glyphicon glyphicon-star"></span> Étape 3 : Réserver !</span>
+			<span class="panel-title clearfix large"><span class="glyphicon glyphicon-star"></span> <?php echo $this->lang->line('reservationSalle_step_3') ?></span>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-10 col-md-offset-1">
@@ -20,7 +20,7 @@
 						$attributes = array(
 							'class'		=> "control-label col-md-$tailleLabel",
 						);
-						echo form_label('Nom', $critere, $attributes);
+						echo form_label($this->lang->line('reservationSalle_label_'.$critere), $critere, $attributes);
 					?>
 					<div class="input-group col-md-7">
 						<?php
@@ -43,9 +43,9 @@
 						$attributes = array(
 							'class'		=> "control-label col-md-$tailleLabel"
 						);
-						echo form_label('Date', $critere, $attributes);
+						echo form_label($this->lang->line('reservationSalle_label_'.$critere), $critere, $attributes);
 					?>
-					<div class="input-group date col-md-7">
+					<div class="input-group <?php echo $user_language ?> date col-md-7">
 						<?php
 							$attributes = array(
 								'id'		=> $critere,
@@ -69,37 +69,37 @@
 						$attributes = array(
 							'class'		=> "control-label col-md-$tailleLabel"
 						);
-						echo form_label('Créneau horaire', $critere, $attributes);
+						echo form_label($this->lang->line('reservationSalle_label_'.$critere), $critere, $attributes);
 					?>
 					<div class="input-group col-md-7">
 						<?php
 							$attributes = 'class="form-control"';
 							$options = array(
-								'-1'	=> 'Tous',
-								'12'	=> '12h - 13h',
-								'13'	=> '13h - 14h',
-								'14'	=> '14h - 15h',
-								'15'	=> '15h - 16h',
-								'16'	=> '16h - 17h',
-								'17'	=> '17h - 18h',
-								'18'	=> '18h - 19h',
-								'19'	=> '19h - 20h',
-								'20'	=> '20h - 21h',
-								'21'	=> '21h - 22h',
-								'22'	=> '22h - 23h',
-								'23'	=> '23h - 00h',
-								'0'		=> '00h - 01h',
-								'1'		=> '01h - 02h',
-								'2'		=> '02h - 03h',
-								'3'		=> '03h - 04h',
-								'4'		=> '04h - 05h',
-								'5'		=> '05h - 06h',
-								'6'		=> '06h - 07h',
-								'7'		=> '07h - 08h',
-								'8'		=> '08h - 09h',
-								'9'		=> '09h - 10h',
-								'10'	=> '10h - 11h',
-								'11'	=> '11h - 12h',
+								'-1'	=> $this->lang->line('time_slot_all'),
+								'12'	=> $this->lang->line('time_slot_12'),
+								'13'	=> $this->lang->line('time_slot_13'),
+								'14'	=> $this->lang->line('time_slot_14'),
+								'15'	=> $this->lang->line('time_slot_15'),
+								'16'	=> $this->lang->line('time_slot_16'),
+								'17'	=> $this->lang->line('time_slot_17'),
+								'18'	=> $this->lang->line('time_slot_18'),
+								'19'	=> $this->lang->line('time_slot_19'),
+								'20'	=> $this->lang->line('time_slot_20'),
+								'21'	=> $this->lang->line('time_slot_21'),
+								'22'	=> $this->lang->line('time_slot_22'),
+								'23'	=> $this->lang->line('time_slot_23'),
+								'0'		=> $this->lang->line('time_slot_00'),
+								'1'		=> $this->lang->line('time_slot_01'),
+								'2'		=> $this->lang->line('time_slot_02'),
+								'3'		=> $this->lang->line('time_slot_03'),
+								'4'		=> $this->lang->line('time_slot_04'),
+								'5'		=> $this->lang->line('time_slot_05'),
+								'6'		=> $this->lang->line('time_slot_06'),
+								'7'		=> $this->lang->line('time_slot_07'),
+								'8'		=> $this->lang->line('time_slot_08'),
+								'9'		=> $this->lang->line('time_slot_09'),
+								'10'	=> $this->lang->line('time_slot_10'),
+								'11'	=> $this->lang->line('time_slot_11'),
 							);
 							echo form_dropdown($critere, $options, set_value($critere), $attributes);
 						?>
@@ -115,7 +115,7 @@
 							$attributes = array(
 								'id'		=> 'submitBooking',
 								'class'		=> 'btn btn-primary',
-								'value'		=> 'Réserver'
+								'value'		=> $this->lang->line('reservationSalle_label_submit')
 							);
 							echo form_submit($attributes);
 						?>

@@ -50,6 +50,9 @@ class Reservation_model extends CI_Model {
 
 	// Renvoie vrai si au moins une réservation répondant aux critères spécifiés existe.
 	public function bookingExists($data) {
+		if (isset($data['date_concert'])) {
+			$data['date_concert'] = date("d-m-Y", strtotime($data['date_concert']));
+		} 
 		$this->db->where($data);
 		$this->db->from('reservation');
 		return $this->db->count_all_results() == 1;
@@ -59,6 +62,7 @@ class Reservation_model extends CI_Model {
 	public function add($data, $artiste) {
 		$data['artiste'] = $artiste;
 		$data['statut'] = 'en attente';
+		$data['date_concert'] = date("d-m-Y", strtotime($data['date_concert']));
 		$data['date_reservation'] = date('d-m-Y', time());
 		$this->db->insert('reservation', $data);
 	}
